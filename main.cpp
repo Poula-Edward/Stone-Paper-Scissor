@@ -2,8 +2,18 @@
 #include <cstdlib>
 using namespace std;
 
-enum enWinner{ Player = 1, Computer = 2, Draw = 3};
-enum enGameChoice{ Stone = 1, Paper = 2, Scissor = 3};
+enum enWinner
+{
+    Player = 1,
+    Computer = 2,
+    Draw = 3
+};
+enum enGameChoice
+{
+    Stone = 1,
+    Paper = 2,
+    Scissor = 3
+};
 
 struct stGameResults
 {
@@ -13,7 +23,6 @@ struct stGameResults
     int DrawTimes = 0;
     enWinner GameWinner;
     string WinnerName;
-
 };
 
 struct stRoundResult
@@ -65,7 +74,7 @@ enWinner WhoWonTheRound(stRoundResult RoundResult)
     {
         return enWinner::Draw;
     }
-    else if ((RoundResult.PlayerChoice == enGameChoice::Paper && RoundResult.ComputerChoice == enGameChoice::Stone) || (RoundResult.PlayerChoice==enGameChoice::Scissor && RoundResult.ComputerChoice==enGameChoice::Paper) || (RoundResult.PlayerChoice==enGameChoice::Stone && RoundResult.ComputerChoice==enGameChoice::Scissor) )
+    else if ((RoundResult.PlayerChoice == enGameChoice::Paper && RoundResult.ComputerChoice == enGameChoice::Stone) || (RoundResult.PlayerChoice == enGameChoice::Scissor && RoundResult.ComputerChoice == enGameChoice::Paper) || (RoundResult.PlayerChoice == enGameChoice::Stone && RoundResult.ComputerChoice == enGameChoice::Scissor))
     {
         return enWinner::Player;
     }
@@ -77,21 +86,20 @@ enWinner WhoWonTheRound(stRoundResult RoundResult)
 
 string WinnerName(enWinner Winner)
 {
-    string WinnerName[3] = { "Player", "Computer", "No Winner" };
+    string WinnerName[3] = {"Player", "Computer", "No Winner"};
     return WinnerName[Winner - 1]; // bec. array is zero based
 }
 
 string ChoiceName(enGameChoice Choice)
 {
-    string ArrayGameChoice[3] = { "Stone", "Paper", "Scissor" };
+    string ArrayGameChoice[3] = {"Stone", "Paper", "Scissor"};
     return ArrayGameChoice[Choice - 1]; // Array is zero based
-
 }
 
 void PrintRoundResult(stRoundResult RoundResult)
 {
     cout << "\n____________Round [" << RoundResult.RoundNumber << "]____________\n\n";
-    cout << "Player Choice: " <<ChoiceName(RoundResult.PlayerChoice) << endl;
+    cout << "Player Choice: " << ChoiceName(RoundResult.PlayerChoice) << endl;
     cout << "Computer Choice: " << ChoiceName(RoundResult.ComputerChoice) << endl;
     cout << "Winner: " << RoundResult.WinnerName << endl;
     cout << "---------------------------------\n\n";
@@ -110,7 +118,6 @@ enWinner WhoWonTheGame(int ComputerWinTimes, int PlayerWinTimes)
     else
     {
         return enWinner::Draw;
-
     }
 }
 
@@ -126,7 +133,6 @@ stGameResults FillGameResults(int HowManyRounds, int PlayerWinTimes, int Compute
     GameResult.WinnerName = WinnerName(GameResult.GameWinner);
 
     return GameResult;
-
 }
 
 stGameResults PlayGame(int NumberOfRounds)
@@ -158,7 +164,6 @@ stGameResults PlayGame(int NumberOfRounds)
         }
 
         PrintRoundResult(RoundResult);
-
     }
 
     return FillGameResults(NumberOfRounds, CountPlayerWin, CountComputerWin, CountDraw);
@@ -167,13 +172,12 @@ stGameResults PlayGame(int NumberOfRounds)
 void ShowFinalGameResults(stGameResults GameResults)
 {
     cout << "\t\t_____________________ [Game Results]_____________________\n\n";
-    cout << "\t\tGame Rounds : " <<GameResults.GameRounds << endl;
-    cout << "\t\tPlayer won times : " << GameResults.PlayerWinTimes<< endl;
+    cout << "\t\tGame Rounds : " << GameResults.GameRounds << endl;
+    cout << "\t\tPlayer won times : " << GameResults.PlayerWinTimes << endl;
     cout << "\t\tComputer won times : " << GameResults.ComputerWinTimes << endl;
     cout << "\t\tDraw times : " << GameResults.DrawTimes << endl;
-    cout << "\t\tFinal Winner : " <<GameResults.WinnerName << endl;
+    cout << "\t\tFinal Winner : " << GameResults.WinnerName << endl;
     cout << "\t\t___________________________________________________________\n";
-   
 }
 
 void StartGame()
@@ -185,7 +189,7 @@ void StartGame()
         ResetScreen();
         stGameResults GameResults = PlayGame(HowManyRounds());
         ShowFinalGameResults(GameResults);
-        
+
         cout << "\nDo You Want To Play Again?...";
         cin >> PlayMore;
 
